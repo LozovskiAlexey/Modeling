@@ -80,9 +80,16 @@ void Polinomial::set(const size_t power, const double coeff)
 double Polinomial::count(const double x)
 {
     auto result = 0.;
+    double powered_x = 1;
 
-    for (size_t tmp_power=0; tmp_power<=_power; ++tmp_power)
-        result += polinomial[tmp_power] * std::pow(x, tmp_power);
+    for (size_t tmp_power=3; tmp_power<=_power; tmp_power+=4)
+    {
+        for (size_t i=0; i<tmp_power; ++i)
+            powered_x *= x;
+
+        result += polinomial[tmp_power] * powered_x;
+        powered_x = 1;
+    }
 
     return result;
 }

@@ -29,6 +29,10 @@ int main()
     
     cout << "Set table step: ";
     cin >> table_step;
+
+    size_t approx;
+    cout << "Set Approx: ";
+    cin >> approx;
     
     
     // ------------- Подготовка данных --------------
@@ -39,9 +43,9 @@ int main()
 
     table.x_values = get_x_values(table_x_start, table_x_end, table_step); // формируем стобец значений x
 
-    table.picard_2 = picard_method(table.x_values, 2);
-    table.picard_3 = picard_method(table.x_values, 3);
-    table.picard_n = picard_method(table.x_values, 4);
+    table.picard_2 = picard_method(table.x_values, approx);
+    table.picard_3 = picard_method(table.x_values, approx+1);
+    table.picard_n = picard_method(table.x_values, approx+2);
     table.explicit_result = explicit_method(table.x_values, step);
     table.implicit_result = implicit_method(table.x_values, step);
 

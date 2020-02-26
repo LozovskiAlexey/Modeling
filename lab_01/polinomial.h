@@ -5,6 +5,7 @@
 #include <vector>
 #include <cmath>
 
+
 class Polinomial
 {
 public:

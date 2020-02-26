@@ -5,6 +5,19 @@ using namespace std;
 
 // Тесты пройдены
 
+double myPow(double value, int pow){
+    double result = 1;
+
+    while (pow > 0){
+        if (pow % 2 == 1)
+            result *= value;
+        value *= value;
+        pow /= 2;
+    }
+
+    return result;
+}
+
 int main()
 {
     /*
@@ -42,6 +55,7 @@ int main()
     cout << endl << endl;
 
     */
+    /*
     cout << "start" << endl;
     Polinomial start(1, 2);
     size_t a = 2;
@@ -69,7 +83,11 @@ int main()
         integrated.show();
         cout << endl << "====================================" << endl;
     }
+*/
+    double a = 1.0046;
+    auto res = myPow(a, 53);
 
+    cout << "result: " << res << endl;
     /*
     Polinomial start(1, 2);
     double x = 2;
