@@ -20,22 +20,18 @@ Polinomial Polinomial::operator+(const Polinomial &other)
     // создаем полином с наибольшей из двух степенью
     Polinomial result(std::max(_power, other._power));
 
-    // модификация
-    // result.polinomial[2] += polinomial[2] + other.polinomial[2];
+    // левый полином всегда x^2
+    result.polinomial[2] += polinomial[2];
 
-    // проходим по всем коэф-там при икс, суммируем, степень - индекс элемента
-    for (size_t tmp_power=0; tmp_power<=_power; ++tmp_power){
-        result.polinomial[tmp_power] += polinomial[tmp_power];
-    }
-
-    for (size_t tmp_power=0; tmp_power<=other._power; ++tmp_power){
+    // правый полином вида C*x^6 + C*x^10 + ... + C*x^(2+4*n)
+    for (size_t tmp_power=6; tmp_power<=other._power; tmp_power+=4){
         result.polinomial[tmp_power] += other.polinomial[tmp_power];
     }
 
     return result;
 }
 
-// Исправлено
+
 Polinomial Polinomial::operator*(const Polinomial &other)
 {
     Polinomial result(_power+other._power);
@@ -43,8 +39,8 @@ Polinomial Polinomial::operator*(const Polinomial &other)
     size_t tmp_power;
     double coeff;
 
-    for (size_t i=0; i<=_power; ++i)
-        for (size_t j=0; j<=other._power; ++j)
+    for (size_t i=3; i<=_power; i+=4)
+        for (size_t j=3; j<=other._power; j+=4)
         {
             tmp_power = i+j;                           // складываем степени (x^n * x^m = x^(n+m))
             coeff = polinomial[i]*other.polinomial[j]; // считаем коэфф-ты при икс
@@ -64,7 +60,7 @@ Polinomial Polinomial::integrate()
     double integrated_coeff;
 
     // интегрируем по формуле integral C * (x^n) = C * x^(n+1) / n+1
-    for (size_t tmp_power=0; tmp_power<=new_power; ++tmp_power)
+    for (size_t tmp_power=2; tmp_power<new_power; tmp_power+=4)
     {
         integrated_power = tmp_power + 1;
         integrated_coeff = polinomial[tmp_power] / integrated_power;

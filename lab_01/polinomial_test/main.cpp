@@ -41,7 +41,7 @@ int main()
     mult.show();
     cout << endl << endl;
 
-
+    */
     cout << "start" << endl;
     Polinomial start(1, 2);
     size_t a = 2;
@@ -69,12 +69,12 @@ int main()
         integrated.show();
         cout << endl << "====================================" << endl;
     }
-    */
 
+    /*
     Polinomial start(1, 2);
     double x = 2;
     auto result = start.count(x);
     cout << "result: " << result << endl;
-
+    */
     return 0;
 }
