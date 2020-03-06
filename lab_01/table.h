@@ -5,6 +5,7 @@
 #include <vector>
 
 using col_t = std::vector<double>;
+
 typedef struct table{
     col_t x_values;
     col_t picard_2;
@@ -16,7 +17,7 @@ typedef struct table{
 } table_t;
 
 
-void show(table_t& table);
+void show(table_t& table, size_t approx);
 
 
 #endif // TABLE_H

@@ -44,7 +44,7 @@ Polinomial Polinomial::operator*(const Polinomial &other)
         {
             tmp_power = i+j;                           // складываем степени (x^n * x^m = x^(n+m))
             coeff = polinomial[i]*other.polinomial[j]; // считаем коэфф-ты при икс
-            result.polinomial[tmp_power] += coeff;            // увеличиваем коэфф-т при икс в степени tmp_coeff
+            result.polinomial[tmp_power] += coeff;     // увеличиваем коэфф-т при икс в степени tmp_coeff
         }
 
     return result;

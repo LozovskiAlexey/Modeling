@@ -1,6 +1,6 @@
 #include "table.h"
 
-void show(table_t& table){
+void show(table_t& table, size_t approx){
 
     auto x = table.x_values;
     auto picard2 = table.picard_2;
@@ -18,7 +18,7 @@ void show(table_t& table){
     std::cout << std::endl;
 
     std::cout << "         |" << "         Picard (approx)        |" << "          |" << "          |" << std::endl;
-    std::cout << "    X    |" << "    2nd   |   3rd    |    n     |" << " Explicit |" << " Implicit |" << std::endl;
+    std::cout << "    X    |" << "    "<< approx-2 << "     |    " << approx-1 << "     |    " << approx <<"     |" << " Explicit |" << " Implicit |" << std::endl;
     std::cout << "         |" << "          |          |          |" << "          |" << "          |" << std::endl;
     for (size_t row=0.; row<rows; ++row)
     {

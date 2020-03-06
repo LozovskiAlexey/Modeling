@@ -1,10 +1,10 @@
 #include "methods.h"
 
 
-std::vector<double> get_x_values(const double table_x_start, const double table_x_end, const double table_step)
+std::vector<double> get_x_values(const double x_end, const double table_step)
 {
     col_t x_values;
-    for (auto x = table_x_start; x <= table_x_end + table_step; x += table_step){
+    for (auto x = 0.; x <= x_end + table_step; x += table_step){
         x_values.push_back(x);
     }
 
@@ -74,4 +74,29 @@ std::vector<double> picard_method(const col_t x_values, const size_t approximati
         result.push_back(result_polinomial.count(x_values[i]));
 
     return result;
+}
+
+
+double explicit_method(const double step){
+    auto y = 0.;
+    auto result = std::vector<double> {y};
+
+    // начинаем с x = h, в массивах уже лежат  x_values: {x0 = 0}, result: {y0 = 0}
+    for (auto x=step; x<=2; x+=step){
+        y += step * (x*x + y*y);
+        }
+    return y;
+}
+
+double implicit_method(const double step)
+{
+    auto y = 0.;
+
+    for (auto x=step; x<=2; x+=step){
+
+        auto d = 1-4*step*(y+step*x*x);
+        y = (1 - sqrt(d)) / (2*step);
+
+    }
+    return y;
 }
