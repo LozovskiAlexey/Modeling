@@ -10,6 +10,8 @@ static const double _Le = 12.0;
 static const double _Tn = 2000.0;
 static const double _dt = 1e-6;
 
+static const double _const = _Le / (2*_R*_R*PI);
+
 // Таблица для интерполяции параметров T0, m
 static const std::vector<double> _I { 0.5, 1, 5, 10, 50, 200, 400, 800, 1200 };
 static const std::vector<double> _T0{ 6400, 6790, 7150, 7270, 8010, 9185, 10010, 11140, 12010};
@@ -21,11 +23,11 @@ static const std::vector<double> _sigma{0.031, 0.27, 2.05, 6.06, 12.0, 19.9, 29.
 
 // структура параметров, задаваемых пользователем
 typedef struct parameters {
-    const double Lk;
-    const double Ck;
-    const double Rk;
-    const double Uco;
-    const double I0;
+    const double Lk;  // использовано
+    const double Ck;  // использовано
+    const double Rk;  // использовано
+    const double Uc0; // использовано
+    const double I0;  // использовано
 }param_t;
 
 #endif // DEFINES_H
