@@ -67,7 +67,7 @@
         <number>3</number>
        </property>
        <item row="3" column="2">
-        <widget class="QCustomPlot" name="widget" native="true">
+        <widget class="QCustomPlot" name="GraphWidget_5" native="true">
          <property name="minimumSize">
           <size>
            <width>480</width>
@@ -82,7 +82,7 @@ background-color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QCustomPlot" name="widget_2" native="true">
+        <widget class="QCustomPlot" name="GraphWidget_1" native="true">
          <property name="minimumSize">
           <size>
            <width>480</width>
@@ -97,7 +97,7 @@ background-color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QCustomPlot" name="widget_4" native="true">
+        <widget class="QCustomPlot" name="GraphWidget_2" native="true">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -115,7 +115,7 @@ border-radius: 5px;</string>
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QCustomPlot" name="widget_3" native="true">
+        <widget class="QCustomPlot" name="GraphWidget_3" native="true">
          <property name="minimumSize">
           <size>
            <width>480</width>
@@ -130,7 +130,7 @@ background-color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QCustomPlot" name="widget_5" native="true">
+        <widget class="QCustomPlot" name="GraphWidget_4" native="true">
          <property name="minimumSize">
           <size>
            <width>480</width>
@@ -170,7 +170,7 @@ border-radius: 2px;</string>
              <string notr="true">font-size: 13pt;</string>
             </property>
             <property name="text">
-             <string> U : </string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;U&lt;span style=&quot; vertical-align:sub;&quot;&gt;co&lt;/span&gt;:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -249,7 +249,7 @@ QPushButton:pressed {
              <string notr="true">font-size: 13pt;</string>
             </property>
             <property name="text">
-             <string>L :</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;L&lt;span style=&quot; vertical-align:sub;&quot;&gt;k&lt;/span&gt; :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -262,7 +262,7 @@ QPushButton:pressed {
              <string notr="true">font-size: 13pt;</string>
             </property>
             <property name="text">
-             <string>C :</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;C&lt;span style=&quot; vertical-align:sub;&quot;&gt;k&lt;/span&gt; :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -275,7 +275,7 @@ QPushButton:pressed {
              <string notr="true">font-size: 13pt;</string>
             </property>
             <property name="text">
-             <string> R : </string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;R&lt;span style=&quot; vertical-align:sub;&quot;&gt;k&lt;/span&gt; :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -288,7 +288,7 @@ QPushButton:pressed {
              <string notr="true">font-size: 13pt;</string>
             </property>
             <property name="text">
-             <string> I : </string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;I&lt;span style=&quot; vertical-align:sub;&quot;&gt;0&lt;/span&gt; :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -296,7 +296,7 @@ QPushButton:pressed {
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox">
+           <widget class="QDoubleSpinBox" name="Lk_dataWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>3</horstretch>
@@ -321,7 +321,7 @@ border-redius: 4pr;
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+           <widget class="QDoubleSpinBox" name="Ck_dataWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -331,7 +331,7 @@ border-redius: 4pr;
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+           <widget class="QDoubleSpinBox" name="Rk_dataWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -341,7 +341,7 @@ border-redius: 4pr;
            </widget>
           </item>
           <item row="4" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_4">
+           <widget class="QDoubleSpinBox" name="Uco_dataWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -351,7 +351,7 @@ border-redius: 4pr;
            </widget>
           </item>
           <item row="5" column="1">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_5">
+           <widget class="QDoubleSpinBox" name="Io_dataWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
               <horstretch>0</horstretch>

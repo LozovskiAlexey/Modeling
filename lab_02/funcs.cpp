@@ -8,7 +8,7 @@
 */
 
 // Формирует вектора U, I (массивы значений для построения графиков)
-void count_Runge_Kutta(std::vector<double> &U,std::vector<double> &I, param_t &p)
+void count_Runge_Kutta(QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&))
 {
     auto tmp_U = p.Uc0; // стартовое значение U
     auto tmp_I = p.I0;  // стартовое значение I
@@ -18,7 +18,7 @@ void count_Runge_Kutta(std::vector<double> &U,std::vector<double> &I, param_t &p
         U.push_back(tmp_U);
         I.push_back(tmp_I);
 
-        Runge_Kutta(tmp_I, tmp_U, p);  // вычисляем новые значения I, U
+        method(tmp_I, tmp_U, p);  // вычисляем новые значения I, U
     }
 }
 
@@ -121,9 +121,9 @@ double sigma(const double &T)
     return tmp_sigma;
 }
 
-double interpolate(const std::vector<double> &vec1, const std::vector<double> &vec2, const double &key)
+double interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key)
 {
-    size_t start, end;
+    int start, end;
 
     count_indexes(_I, start, end, key);  // вычисляем индексы для интерполяции
 
@@ -134,9 +134,9 @@ double interpolate(const std::vector<double> &vec1, const std::vector<double> &v
         return vec1[start] + (vec1[end] - vec1[start]) * (key - vec2[start]) / (vec2[end] - vec2[start]);
 }
 
-double log_interpolate(const std::vector<double> &vec1, const std::vector<double> &vec2, const double &key)
+double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key)
 {
-    size_t start, end;
+    int start, end;
 
     count_indexes(_sigma, start, end, key); // вычисляем индексы для интерполяции
 
@@ -153,7 +153,7 @@ double log_interpolate(const std::vector<double> &vec1, const std::vector<double
 // записывает граничные индексы в start, end между которыми
 // расположено значение key
 // в случае, если key находится за пределами массива, берутся первые либо последние два элемента для интерполяции
-void count_indexes(const std::vector<double> &vec, size_t &start, size_t &end, const double &key)
+void count_indexes(const QVector<double> &vec, int &start, int &end, const double &key)
 {
     auto size = vec.size()-1;
 

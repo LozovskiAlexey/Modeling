@@ -2,10 +2,9 @@
 #define FUNCS_H
 
 #include "defines.h"
-#include <cmath>
 
 // p - заданные пользователем параметры
-void count_Runge_Kutta(std::vector<double> &U,std::vector<double> &I, param_t &p);
+void count_Runge_Kutta(QVector<double> &U,QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&));
 void Runge_Kutta(double &U, double &I, param_t &p);
 
 
@@ -28,9 +27,9 @@ double sigma(const double &T);
 
 
 // интерполяция и логарифмическая интерполяция
-double log_interpolate(const std::vector<double> &vec1, const std::vector<double> &vec2, const double &key);
-double interpolate(const std::vector<double> &vec1, const std::vector<double> &vec2, const double &key);
-void count_indexes(const std::vector<double> &vec, size_t &start, size_t &end, const double &key);
+double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key);
+double interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key);
+void count_indexes(const QVector<double> &vec, int &start, int &end, const double &key);
 
 
 #endif // FUNCS_H
