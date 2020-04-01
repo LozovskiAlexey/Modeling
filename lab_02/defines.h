@@ -34,14 +34,16 @@ static const QVector<double> _sigma{0.031, 0.27, 2.05, 6.06, 12.0, 19.9, 29.6, 4
 
 // структура параметров, задаваемых пользователем
 typedef struct {
-    const double Lk;  // использовано
-    const double Ck;  // использовано
-    const double Rk;  // использовано
-    const double Uc0; // использовано
-    const double I0;  // использовано
+    double Lk;  // использовано
+    double Ck;  // использовано
+    double Rk;  // использовано
+    double Uc0; // использовано
+    double I0;  // использовано
 }param_t;
 
+// структура параметров графика
 typedef struct {
+    int number;
     QVector<double> X; // точки графика
     QVector<double> Y;
     QString xAxis;     // названия осей

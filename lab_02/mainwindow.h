@@ -19,11 +19,15 @@ public:
     ~MainWindow();
 
 private:
-    void draw(QCustomPlot *canvas, const draw_t &graph);
+    void draw(QCustomPlot *canvas, const draw_t &graph1, const draw_t &graph2);
+    void addToCanvas(QCustomPlot *canvas, const draw_t &graph);
+    void updateCanvas(QCustomPlot *canvas);
+    void clearCanvas(QCustomPlot *canvas);
+    void setAxis(QCPAxis *canvas, const QVector<double> &axis, const QString &name);
 
-private slots:
-    void on_execButton_clicked();
-    
+    void getData(param_t &p);
+
+private slots:    
     void on_pushButton_clicked();
 
 private:

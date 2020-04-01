@@ -13,49 +13,69 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_execButton_clicked()
+void MainWindow::on_pushButton_clicked()
 {
-    // считать данные
-    // обработать корректность ввода
+    QVector<double> U1, I1;
+    QVector<double> U2, I2;
+    param_t p;
 
-    // запустить count_Runge_Kutta(Runge_Kutte_4th, U, I, p);
-    // запустить count_Runge_Kutta(Runge_Kutte_2nd, U1, I1, p);
-    // отрисовать U I, U1 I1
-
-    // дописать функции для вычисления остальных графиков
-    // отрисовать остальные графики
-    // функция отрисовки графиков
+    count_Runge_Kutta(U1, I1, p, Runge_Kutta);
 }
 
 
-void MainWindow::draw(QCustomPlot *canvas, const draw_t &graph)
+void MainWindow::getData(param_t &p)
+{
+    p.Ck = ui->Ck_dataWidget->value();
+    p.I0 = ui->Io_dataWidget->value();
+    p.Lk = ui->Lk_dataWidget->value();
+    p.Rk = ui->Rk_dataWidget->value();
+    p.Uc0 = ui->Uco_dataWidget->value();
+}
+
+
+void MainWindow::draw(QCustomPlot *canvas, const draw_t &graph1, const draw_t &graph2)
+{
+    // чистим от старых графиков
+    clearCanvas(canvas);
+
+    // добавляем новые графики на холст
+    addToCanvas(canvas, graph1);
+    addToCanvas(canvas, graph2);
+
+    // отрисовываем графики
+    updateCanvas(canvas);
+}
+
+
+void MainWindow::addToCanvas(QCustomPlot *canvas, const draw_t &graph)
 {
     canvas->addGraph();
-    canvas->graph(0)->setData(graph.X, graph.Y);
+    canvas->graph(graph.number)->setData(graph.X, graph.Y);
+    canvas->graph(graph.number)->setPen(graph.color);
 
-    //Задаем цвет графика
-    canvas->graph(0)->setPen(graph.color);
+    setAxis(canvas->xAxis, graph.X, graph.xAxis);
+    setAxis(canvas->yAxis, graph.Y, graph.yAxis);
+}
 
-    //Подписываем оси Ox и Oy
-    canvas->xAxis->setLabel(graph.xAxis);
-    canvas->yAxis->setLabel(graph.yAxis);
+void MainWindow::setAxis(QCPAxis *canvas, const QVector<double> &axis, const QString &name)
+{
+    // название оси
+    canvas->setLabel(name);
 
-    //Установим область, которая будет показываться на графике
-    auto limits = std::minmax_element(graph.X.begin(), graph.X.end());
-    canvas->xAxis->setRange(*limits.first, *limits.second);
+    // границы отображения
+    auto limits = std::minmax_element(axis.begin(), axis.end());
+    canvas->setRange(*limits.first, *limits.second);
+}
 
-    limits = std::minmax_element(graph.Y.begin(), graph.Y.end());
-    canvas->yAxis->setRange(*limits.first, *limits.second);
 
-    //И перерисуем график на нашем widget
+void MainWindow::clearCanvas(QCustomPlot *canvas)
+{
+    canvas->clearGraphs();
+}
+
+
+void MainWindow::updateCanvas(QCustomPlot *canvas)
+{
     canvas->replot();
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    QVector<double> X {-0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4};
-    QVector<double> Y {0.16, 0.09, 0.04, 0.01, 0.0, 0.01, 0.04, 0.09, 0.16};
-    draw_t gr1 = {X, Y, "x", "y", Qt::red};
-    draw(ui->GraphWidget_1, gr1);
-}
