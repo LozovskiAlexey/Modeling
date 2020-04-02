@@ -4,8 +4,8 @@
 #include "defines.h"
 
 // p - заданные пользователем параметры
-void count_Runge_Kutta(QVector<double> &U,QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&));
-void Runge_Kutta(double &U, double &I, param_t &p);
+void count_Runge_Kutta(QVector<double> &t, QVector<double> &U,QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&));
+void Runge_Kutta_4th_approx(double &U, double &I, param_t &p);
 
 
 // вычисляет коэффициенты k, m для вычисления 4 порядка точности
@@ -22,6 +22,7 @@ double Rp(const double &I);
 double integrate(const double &I);
 double count(const double &z, const double &I);
 double T(const double &z, const double &I);
+double T0(const double &I);
 double m(const double &I);
 double sigma(const double &T);
 

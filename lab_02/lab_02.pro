@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     funcs.cpp \
     main.cpp \
+    main_funcs.cpp \
     mainwindow.cpp \
     qcustomplot.cpp \
     runge_kutta_2nd_approx.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     defines.h \
     funcs.h \
+    main_funcs.h \
     mainwindow.h \
     qcustomplot.h \
     runge_kutta_2nd_approx.h \

@@ -7,21 +7,6 @@
  * ! Во всех функциях param_t p - параметры пользователя !
 */
 
-// Формирует вектора U, I (массивы значений для построения графиков)
-void count_Runge_Kutta(QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&))
-{
-    auto tmp_U = p.Uc0; // стартовое значение U
-    auto tmp_I = p.I0;  // стартовое значение I
-
-    for (auto t=0.; t <= 700.; t += _dt)
-    {
-        U.push_back(tmp_U);
-        I.push_back(tmp_I);
-
-        method(tmp_I, tmp_U, p);  // вычисляем новые значения I, U
-    }
-}
-
 
 // основные формулы лабы (см. методичку g(I))
 double G(double I, param_t &p)
@@ -72,6 +57,13 @@ double count(const double &z, const double &I)
 
     return tmp_T * tmp_sigma * z;
 }
+
+
+double T0(const double &I)
+{
+    return interpolate(_T0, _I, I);
+}
+
 
 
 // Параметр T используется для вычисления интеграла

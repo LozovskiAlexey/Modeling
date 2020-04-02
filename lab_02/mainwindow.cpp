@@ -16,8 +16,8 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     param_t p;
-    // data_t data;
-    // graphics_t graphics;
+    data_t data;
+    graphics_t graphics;
 
     getData(p);
 

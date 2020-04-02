@@ -13,6 +13,7 @@ typedef struct parameters param_t;
 typedef struct data data_t;
 typedef struct graphic_points graph_points_t;
 
+typedef struct draw_data draw_data_t;
 typedef struct graphics graphics_t;
 typedef struct graphic graphic_t;
 
@@ -45,13 +46,20 @@ struct graphic_points{
 };
 
 
-struct graphics{
-    QPair <graphic_t*, graphic_t*> Rp;
-    QPair <graphic_t*, graphic_t*> I;
-    QPair <graphic_t*, graphic_t*> U;
-    QPair <graphic_t*, graphic_t*> Ucp;
-    QPair <graphic_t*, graphic_t*> T0;
+struct draw_data{
+    graphics_t *second_approx;
+    graphics_t *fourth_approx;
 };
+
+
+struct graphics{
+    graphic_t *Rp;
+    graphic_t *I;
+    graphic_t *U;
+    graphic_t *Ucp;
+    graphic_t *T0;
+};
+
 
 // структура параметров графика
 struct graphic{
