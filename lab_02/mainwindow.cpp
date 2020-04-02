@@ -15,11 +15,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    // Вынести сюда инициализацию структур
-
-    param_t p;
-    data_t data;
-    draw_data_t graphics;
+    init(data);
+    init(graphics);
 
     getData(p);
 
@@ -29,7 +26,8 @@ void MainWindow::on_pushButton_clicked()
 
     drawAll(graphics);
 
-    // освобождение структур
+    release(data);
+    release(graphics);
 }
 
 

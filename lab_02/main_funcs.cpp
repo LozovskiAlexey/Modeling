@@ -51,7 +51,7 @@ void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &
     auto tmp_U = p.Uc0; // стартовое значение U
     auto tmp_I = p.I0;  // стартовое значение I
 
-    for (auto t=0.; t <= 700.; t += _dt)
+    for (auto t=0.; t <= _tmax; t += _dt)
     {
         U.push_back(tmp_U);
         I.push_back(tmp_I);
@@ -152,3 +152,52 @@ void init(graph_points_t *data)
 {
     data = new graph_points_t;
 }
+
+
+void init(data_t &data)
+{
+    init(data.second_approx);
+    init(data.fourth_approx);
+}
+
+
+void init(draw_data_t &data)
+{
+    init(data.second_approx);
+    init(data.fourth_approx);
+}
+
+
+void release(draw_data_t &data)
+{
+    release(data.second_approx);
+    release(data.second_approx);
+}
+
+void release(graphics_t *graphic)
+{
+    release(graphic->I);
+    release(graphic->U);
+    release(graphic->Ucp);
+    release(graphic->Rp);
+    release(graphic->T0);
+
+    delete graphic;
+}
+
+void release(graphic_t *graphic)
+{
+    delete graphic;
+}
+
+void release(data_t &data)
+{
+    release(data.second_approx);
+    release(data.fourth_approx);
+}
+
+void release(graph_points_t *graphic)
+{
+    delete graphic;
+}
+

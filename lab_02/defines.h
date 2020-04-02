@@ -5,6 +5,8 @@
 
 static const QVector<QColor> color {Qt::red, Qt::blue};
 
+static const double _tmax = 700;
+
 static const double PI = 3.141592653589793;
 
 static const double _R  = 0.35;

@@ -34,4 +34,14 @@ void generate_T0_graphic(graphic_t *T0, graph_points_t *data);
 void init(graphic_t *graphic, QVector<double> &X, QVector<double> &Y, QString xAxis, QString yAxis);
 void init(graph_points_t *data);
 void init(graphics_t *data);
+void init(data_t &data);
+void init(draw_data_t &data);
+
+void release(draw_data_t &data);
+void release(graphics_t *graphic);
+void release(graphic_t *graphic);
+
+void release(graph_points_t *graphic);
+void release(data_t &data);
+
 #endif // MAIN_FUNCS_H
