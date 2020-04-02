@@ -21,8 +21,8 @@ public:
 
 private:
     void drawAll(draw_data_t &graphics);
-    void draw(QCustomPlot *canvas, const graphic_t &graph1, const graphic_t &graph2);
-    void addToCanvas(QCustomPlot *canvas, const graphic_t &graph);
+    void draw(QCustomPlot *canvas, graphic_t &graph1, graphic_t &graph2);
+    void addToCanvas(QCustomPlot *canvas, const graphic_t &graph, int no);
     void updateCanvas(QCustomPlot *canvas);
     void clearCanvas(QCustomPlot *canvas);
     void setAxis(QCPAxis *canvas, const QVector<double> &axis, const QString &name);

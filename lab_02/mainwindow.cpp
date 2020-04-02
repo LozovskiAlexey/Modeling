@@ -15,17 +15,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    // Вынести сюда инициализацию структур
+
     param_t p;
     data_t data;
-    graphics_t graphics;
+    draw_data_t graphics;
 
     getData(p);
 
-    //countAll(data, p);
+    count_all(data, p);
 
-    //formGraphics(graphics, data);
+    form_graphs(graphics, data);
 
-    //drawAll(graphics);
+    drawAll(graphics);
+
+    // освобождение структур
 }
 
 
@@ -39,29 +43,40 @@ void MainWindow::getData(param_t &p)
 }
 
 
-void MainWindow::draw(QCustomPlot *canvas, const graphic_t &graph1, const graphic_t &graph2)
+void MainWindow::drawAll(draw_data_t &graphics)
+{
+    draw(ui->GraphWidget_1, *graphics.fourth_approx->I, *graphics.second_approx->I);
+    draw(ui->GraphWidget_2, *graphics.fourth_approx->U, *graphics.second_approx->U);
+    draw(ui->GraphWidget_3, *graphics.fourth_approx->Ucp, *graphics.second_approx->Ucp);
+    draw(ui->GraphWidget_4, *graphics.fourth_approx->T0, *graphics.second_approx->T0);
+    draw(ui->GraphWidget_5, *graphics.fourth_approx->Rp, *graphics.second_approx->Rp);
+}
+
+
+void MainWindow::draw(QCustomPlot *canvas, graphic_t &graph1, graphic_t &graph2)
 {
     // чистим от старых графиков
     clearCanvas(canvas);
 
     // добавляем новые графики на холст
-    addToCanvas(canvas, graph1);
-    addToCanvas(canvas, graph2);
+    addToCanvas(canvas, graph1, 0);
+    addToCanvas(canvas, graph2, 1);
 
     // отрисовываем графики
     updateCanvas(canvas);
 }
 
 
-void MainWindow::addToCanvas(QCustomPlot *canvas, const graphic_t &graph)
+void MainWindow::addToCanvas(QCustomPlot *canvas, const graphic_t &graph, int no)
 {
     canvas->addGraph();
-    canvas->graph(graph.number)->setData(graph.X, graph.Y);
-    canvas->graph(graph.number)->setPen(graph.color);
+    canvas->graph(no)->setData(graph.X, graph.Y);
+    canvas->graph(no)->setPen(color[no]);
 
     setAxis(canvas->xAxis, graph.X, graph.xAxis);
     setAxis(canvas->yAxis, graph.Y, graph.yAxis);
 }
+
 
 void MainWindow::setAxis(QCPAxis *canvas, const QVector<double> &axis, const QString &name)
 {

@@ -63,12 +63,10 @@ struct graphics{
 
 // структура параметров графика
 struct graphic{
-    int number;        // номер графика (0 1)
     QVector<double> X; // точки графика
     QVector<double> Y;
     QString xAxis;     // названия осей
     QString yAxis;
-    QColor color;      // цвет графика
 };
 
 #endif // SCTRUCTS_H

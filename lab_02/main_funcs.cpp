@@ -1,6 +1,6 @@
 #include "main_funcs.h"
 
-void countAll(data_t &data, param_t &p)
+void count_all(data_t &data, param_t &p)
 {
     count_approx(data.fourth_approx, p, Runge_Kutta_4th_approx);
     count_approx(data.second_approx, p, Runge_Kutta_2nd_approx);
@@ -10,6 +10,8 @@ void countAll(data_t &data, param_t &p)
 
 void count_approx(graph_points_t *data, param_t &p, void (*method)(double&, double&, param_t&))
 {
+    init(data);
+
     count_U_I(data, p, method);
     count_Rp(data);
     count_Ucp(data);
@@ -30,7 +32,7 @@ void count_Rp(graph_points_t *data)
 }
 
 
-void count_Uco(graph_points_t *data)
+void count_Ucp(graph_points_t *data)
 {
     count_Ucp(data->Ucp, data->U, data->I);
 }
@@ -92,6 +94,8 @@ void form_graphs(draw_data_t &graphics, data_t &data)
 
 void generate_graphs(graphics_t *graphics, graph_points_t *data)
 {
+    init(graphics);
+
     generate_Rp_graphic(graphics->Rp, data);
     generate_I_graphic(graphics->I, data);
     generate_U_graphic(graphics->U, data);
@@ -104,39 +108,47 @@ void generate_graphs(graphics_t *graphics, graph_points_t *data)
 
 void generate_Rp_graphic(graphic_t *Rp, graph_points_t *data)
 {
-    Rp = init(data->Rp, data->I, "Rp", "t");
+    init(Rp, data->Rp, data->I, "Rp", "t");
 }
 
 void generate_I_graphic(graphic_t *I, graph_points_t *data)
 {
-    I = init(data->I, data->t, "I", "t");
+    init(I, data->I, data->t, "I", "t");
 }
 
 void generate_U_graphic(graphic_t *U, graph_points_t *data)
 {
-    U = init(data->U, data->t, "U", "t");
+    init(U, data->U, data->t, "U", "t");
 }
 
 void generate_Ucp_graphic(graphic_t *Ucp, graph_points_t *data)
 {
-    Ucp = init(data->Ucp, data->t, "Ucp", "t");
+    init(Ucp, data->Ucp, data->t, "Ucp", "t");
 }
 
 void generate_T0_graphic(graphic_t *T0, graph_points_t *data)
 {
-    T0 = init(data->T0, data->t, "T0", "t");
+    init(T0, data->T0, data->t, "T0", "t");
 }
 
+// ============================================================================================
 
-
-graphic_t *init(QVector<double> &X, QVector<double> &Y, QString xAxis, QString yAxis)
+void init(graphic_t *graphic, QVector<double> &X, QVector<double> &Y, QString xAxis, QString yAxis)
 {
-    auto graphic = new graphic_t;
+    graphic = new graphic_t;
 
     graphic->X = X;
     graphic->Y = Y;
     graphic->xAxis = xAxis;
     graphic->yAxis = yAxis;
+}
 
-    return graphic;
+void init(graphics_t *data)
+{
+    data = new graphics_t;
+}
+
+void init(graph_points_t *data)
+{
+    data = new graph_points_t;
 }
