@@ -22,41 +22,6 @@ void count_Runge_Kutta(QVector<double> &U, QVector<double> &I, param_t &p, void 
     }
 }
 
-// Вычисляет методом Рунге-Кутты пару значений U, I
-void Runge_Kutta(double &U, double &I, param_t &p)
-{
-    double k;                    // коэффициенты для вычисления 4 порядка точности
-    double m;
-
-    count_coeffs(k, m, I, U, p);    // вычисляем k, m
-
-    U += _dt*m/6;                 // m = m1+m2+m3+m4
-    I += _dt*k/6;                 // k = k1+k2+k3+k4
-}
-
-// Вычисляет коэф-ты K и M (используются в пошаговом Рунге-Кутта)
-void count_coeffs(double &k, double &m, double I, double U, param_t &p)
-{
-    double k1, k2, k3, k4;
-    double m1, m2, m3, m4;
-
-    // расчет коэффициентов k и m
-    m1 = G(I, p);
-    k1 = F(I, U, p);
-
-    m2 = G(I+_dt*k1/2, p);
-    k2 = F(I+_dt*k1/2, U+_dt*m1/2, p);
-
-    m3 = G(I+_dt*k2/2, p);
-    k3 = F(I+_dt*k2/2, U+_dt*m2/2, p);
-
-    m4 = G(I+_dt*k3/2, p);
-    k4 = F(I+_dt*k3/2, U+_dt*m3/2, p);
-
-    // в результирующие переменные запишем сумму
-    k = k1 + 2*k2 + 2*k3 + k4;
-    m = m1 + 2*m2 + 2*m3 + m4;
-}
 
 // основные формулы лабы (см. методичку g(I))
 double G(double I, param_t &p)
@@ -64,11 +29,13 @@ double G(double I, param_t &p)
     return -I / p.Ck;
 }
 
+
 // основные формулы лабы (см. методичку F(I, U))
 double F(double I, double U, param_t &p)
 {
     return (U - I*(p.Rk - Rp(I))) / p.Lk;
 }
+
 
 // Вычисление параметра Rp функции F(I, U)
 double Rp(const double &I)
@@ -77,6 +44,7 @@ double Rp(const double &I)
 
     return _const / integral;
 }
+
 
 // Интегрирование методом трапеций
 double integrate(const double &I)
@@ -95,6 +63,7 @@ double integrate(const double &I)
     return res;
 }
 
+
 // вычисляет подынтегральное выражение на каждом z
 double count(const double &z, const double &I)
 {
@@ -103,6 +72,7 @@ double count(const double &z, const double &I)
 
     return tmp_T * tmp_sigma * z;
 }
+
 
 // Параметр T используется для вычисления интеграла
 double T(const double &z, const double &I)
@@ -113,6 +83,7 @@ double T(const double &z, const double &I)
     return tmp_t0 + (_Tn - tmp_t0)*std::pow(z, tmp_m); // подставляем в формулу
 }
 
+
 // Параметр sigma используется для вычисления интеграла
 double sigma(const double &T)
 {
@@ -121,11 +92,12 @@ double sigma(const double &T)
     return tmp_sigma;
 }
 
+
 double interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key)
 {
     int start, end;
 
-    count_indexes(_I, start, end, key);  // вычисляем индексы для интерполяции
+    count_indexes(vec2, start, end, key);  // вычисляем индексы для интерполяции
 
     // если значение есть в таблице - берем его, иначе интерполируем
     if (start == end)
@@ -134,11 +106,12 @@ double interpolate(const QVector<double> &vec1, const QVector<double> &vec2, con
         return vec1[start] + (vec1[end] - vec1[start]) * (key - vec2[start]) / (vec2[end] - vec2[start]);
 }
 
+
 double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key)
 {
     int start, end;
 
-    count_indexes(_sigma, start, end, key); // вычисляем индексы для интерполяции
+    count_indexes(vec2, start, end, key); // вычисляем индексы для интерполяции
 
     // если значение есть в таблице - берем его, иначе интерполируем
     if (start == end)
@@ -149,6 +122,7 @@ double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2,
         return std::exp(res);
     }
 }
+
 
 // записывает граничные индексы в start, end между которыми
 // расположено значение key

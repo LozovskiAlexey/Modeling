@@ -1,18 +1,14 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-#include <algorithm>
-#include <QString>
-#include <QColor>
-#include <QVector>
-#include <cmath>
+#include "structs.h"
 
 static const double PI = 3.141592653589793;
 
 static const double _R  = 0.35;
 static const double _Le = 12.0;
 static const double _Tn = 2000.0;
-static const double _dt = 1e-6;
+static const double _dt = 4;
 
 static const double _const = _Le / (2*_R*_R*PI);
 

@@ -19,13 +19,18 @@ SOURCES += \
     funcs.cpp \
     main.cpp \
     mainwindow.cpp \
-    qcustomplot.cpp
+    qcustomplot.cpp \
+    runge_kutta_2nd_approx.cpp \
+    runge_kutta_4th_approx.cpp
 
 HEADERS += \
     defines.h \
     funcs.h \
     mainwindow.h \
-    qcustomplot.h
+    qcustomplot.h \
+    runge_kutta_2nd_approx.h \
+    runge_kutta_4th_approx.h \
+    structs.h
 
 FORMS += \
     mainwindow.ui

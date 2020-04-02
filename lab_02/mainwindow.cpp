@@ -15,11 +15,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QVector<double> U1, I1;
-    QVector<double> U2, I2;
     param_t p;
+    // data_t data;
+    // graphics_t graphics;
 
-    count_Runge_Kutta(U1, I1, p, Runge_Kutta);
+    getData(p);
+
+    //countAll(data, p);
+
+    //formGraphics(graphics, data);
+
+    //drawAll(graphics);
 }
 
 
@@ -33,7 +39,7 @@ void MainWindow::getData(param_t &p)
 }
 
 
-void MainWindow::draw(QCustomPlot *canvas, const draw_t &graph1, const draw_t &graph2)
+void MainWindow::draw(QCustomPlot *canvas, const graphic_t &graph1, const graphic_t &graph2)
 {
     // чистим от старых графиков
     clearCanvas(canvas);
@@ -47,7 +53,7 @@ void MainWindow::draw(QCustomPlot *canvas, const draw_t &graph1, const draw_t &g
 }
 
 
-void MainWindow::addToCanvas(QCustomPlot *canvas, const draw_t &graph)
+void MainWindow::addToCanvas(QCustomPlot *canvas, const graphic_t &graph)
 {
     canvas->addGraph();
     canvas->graph(graph.number)->setData(graph.X, graph.Y);
