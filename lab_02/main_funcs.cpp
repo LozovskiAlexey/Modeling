@@ -2,20 +2,33 @@
 
 void count_all(data_t &data, param_t &p)
 {
-    count_approx(data.fourth_approx, p, Runge_Kutta_4th_approx);
-    count_approx(data.second_approx, p, Runge_Kutta_2nd_approx);
+    count_params(data.fourth_approx, p, Runge_Kutta_fourth_approx);
+    count_params(data.second_approx, p, Runge_Kutta_second_approx);
+}
+
+void generate_graphs(draw_data_t &graphics, data_t &data)
+{
+    generate_graphs(graphics.second_approx, data.second_approx);
+    generate_graphs(graphics.fourth_approx, data.fourth_approx);
 }
 
 // =============================================================================================
 
-void count_approx(graph_points_t *data, param_t &p, void (*method)(double&, double&, param_t&))
+void count_params(graph_points_t *data, param_t &p, void (*method)(double&, double&, param_t&))
 {
-    init(data);
-
     count_U_I(data, p, method);
     count_Rp(data);
     count_Ucp(data);
     count_T0(data);
+}
+
+void generate_graphs(graphics_t *graphics, graph_points_t *data)
+{
+    generate_Rp_graphic(graphics->Rp, data);
+    generate_I_graphic(graphics->I, data);
+    generate_U_graphic(graphics->U, data);
+    generate_Ucp_graphic(graphics->Ucp, data);
+    generate_T0_graphic(graphics->T0, data);
 }
 
 // =============================================================================================
@@ -43,68 +56,6 @@ void count_T0(graph_points_t *data)
     count_T0(data->T0, data->I);
 }
 
-// =============================================================================================
-
-
-void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&))
-{
-    auto tmp_U = p.Uc0; // стартовое значение U
-    auto tmp_I = p.I0;  // стартовое значение I
-
-    for (auto t=0.; t <= _tmax; t += _dt)
-    {
-        U.push_back(tmp_U);
-        I.push_back(tmp_I);
-        T.push_back(t);
-
-        method(tmp_I, tmp_U, p);  // вычисляем новые значения I, U
-    }
-}
-
-
-void count_Rp(QVector<double> &_Rp, QVector<double> &I)
-{
-    for (auto tmp_I : I)
-        _Rp.push_back(Rp(tmp_I));
-}
-
-
-void count_Ucp(QVector<double> &_Ucp, QVector<double> &U, QVector<double> &I)
-{
-    for (int i=0; i<I.size(); ++i)
-        _Ucp.push_back(U[i]*I[i]);
-}
-
-
-void count_T0(QVector<double> &_T0, QVector<double> &I)
-{
-    for (auto tmp_I : I)
-        _T0.push_back(T0(tmp_I));
-}
-
-// =============================================================================================
-
-
-void form_graphs(draw_data_t &graphics, data_t &data)
-{
-    generate_graphs(graphics.second_approx, data.second_approx);
-    generate_graphs(graphics.fourth_approx, data.fourth_approx);
-}
-
-
-void generate_graphs(graphics_t *graphics, graph_points_t *data)
-{
-    init(graphics);
-
-    generate_Rp_graphic(graphics->Rp, data);
-    generate_I_graphic(graphics->I, data);
-    generate_U_graphic(graphics->U, data);
-    generate_Ucp_graphic(graphics->Ucp, data);
-    generate_T0_graphic(graphics->T0, data);
-}
-
-
-// ============================================================================================
 
 void generate_Rp_graphic(graphic_t *Rp, graph_points_t *data)
 {
@@ -131,17 +82,70 @@ void generate_T0_graphic(graphic_t *T0, graph_points_t *data)
     init(T0, data->T0, data->t, "T0", "t");
 }
 
+
+// =============================================================================================
+
+
+void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&))
+{
+    auto tmp_U = p.Uc0; // стартовое значение U
+    auto tmp_I = p.I0;  // стартовое значение I
+
+    for (auto t=0.; t <= _tmax; t += _dt)
+    {
+        U.push_back(tmp_U);
+        I.push_back(tmp_I);
+        T.push_back(t);
+
+        method(tmp_I, tmp_U, p);  // вычисляем новые значения I, U
+    }
+}
+
+void count_Rp(QVector<double> &_Rp, QVector<double> &I)
+{
+    for (auto tmp_I : I)
+        _Rp.push_back(Rp(tmp_I));
+}
+
+void count_Ucp(QVector<double> &_Ucp, QVector<double> &U, QVector<double> &I)
+{
+    for (int i=0; i<I.size(); ++i)
+        _Ucp.push_back(U[i]*I[i]);
+}
+
+void count_T0(QVector<double> &_T0, QVector<double> &I)
+{
+    for (auto tmp_I : I)
+        _T0.push_back(T0(tmp_I));
+}
+
 // ============================================================================================
 
-void init(graphic_t *graphic, QVector<double> &X, QVector<double> &Y, QString xAxis, QString yAxis)
+void init(draw_data_t &data)
 {
-    graphic = new graphic_t;
-
-    graphic->X = X;
-    graphic->Y = Y;
-    graphic->xAxis = xAxis;
-    graphic->yAxis = yAxis;
+    init(data.second_approx);
+    init(data.fourth_approx);
 }
+
+void init(data_t &data)
+{
+    init(data.second_approx);
+    init(data.fourth_approx);
+}
+
+void release(draw_data_t &data)
+{
+    release(data.second_approx);
+    release(data.second_approx);
+}
+
+void release(data_t &data)
+{
+    release(data.second_approx);
+    release(data.fourth_approx);
+}
+
+// ============================================================================================
 
 void init(graphics_t *data)
 {
@@ -153,25 +157,14 @@ void init(graph_points_t *data)
     data = new graph_points_t;
 }
 
-
-void init(data_t &data)
+void init(graphic_t *graphic, QVector<double> &X, QVector<double> &Y, QString xAxis, QString yAxis)
 {
-    init(data.second_approx);
-    init(data.fourth_approx);
-}
+    graphic = new graphic_t;
 
-
-void init(draw_data_t &data)
-{
-    init(data.second_approx);
-    init(data.fourth_approx);
-}
-
-
-void release(draw_data_t &data)
-{
-    release(data.second_approx);
-    release(data.second_approx);
+    graphic->X = X;
+    graphic->Y = Y;
+    graphic->xAxis = xAxis;
+    graphic->yAxis = yAxis;
 }
 
 void release(graphics_t *graphic)
@@ -185,19 +178,12 @@ void release(graphics_t *graphic)
     delete graphic;
 }
 
-void release(graphic_t *graphic)
-{
-    delete graphic;
-}
-
-void release(data_t &data)
-{
-    release(data.second_approx);
-    release(data.fourth_approx);
-}
-
 void release(graph_points_t *graphic)
 {
     delete graphic;
 }
 
+void release(graphic_t *graphic)
+{
+    delete graphic;
+}

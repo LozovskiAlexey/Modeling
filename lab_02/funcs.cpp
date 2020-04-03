@@ -1,26 +1,16 @@
 #include "funcs.h"
 
-/*
- * Все константы определены в defines.h, также
- * там определена структура parameters
- *
- * ! Во всех функциях param_t p - параметры пользователя !
-*/
-
-
 // основные формулы лабы (см. методичку g(I))
 double G(double I, param_t &p)
 {
     return -I / p.Ck;
 }
 
-
 // основные формулы лабы (см. методичку F(I, U))
 double F(double I, double U, param_t &p)
 {
     return (U - I*(p.Rk - Rp(I))) / p.Lk;
 }
-
 
 // Вычисление параметра Rp функции F(I, U)
 double Rp(const double &I)
@@ -29,7 +19,6 @@ double Rp(const double &I)
 
     return _const / integral;
 }
-
 
 // Интегрирование методом трапеций
 double integrate(const double &I)
@@ -48,7 +37,6 @@ double integrate(const double &I)
     return res;
 }
 
-
 // вычисляет подынтегральное выражение на каждом z
 double count(const double &z, const double &I)
 {
@@ -58,13 +46,10 @@ double count(const double &z, const double &I)
     return tmp_T * tmp_sigma * z;
 }
 
-
 double T0(const double &I)
 {
     return interpolate(_T0, _I, I);
 }
-
-
 
 // Параметр T используется для вычисления интеграла
 double T(const double &z, const double &I)
@@ -75,7 +60,6 @@ double T(const double &z, const double &I)
     return tmp_t0 + (_Tn - tmp_t0)*std::pow(z, tmp_m); // подставляем в формулу
 }
 
-
 // Параметр sigma используется для вычисления интеграла
 double sigma(const double &T)
 {
@@ -83,7 +67,6 @@ double sigma(const double &T)
 
     return tmp_sigma;
 }
-
 
 double interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key)
 {
@@ -97,7 +80,6 @@ double interpolate(const QVector<double> &vec1, const QVector<double> &vec2, con
     else
         return vec1[start] + (vec1[end] - vec1[start]) * (key - vec2[start]) / (vec2[end] - vec2[start]);
 }
-
 
 double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2, const double &key)
 {
@@ -114,7 +96,6 @@ double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2,
         return std::exp(res);
     }
 }
-
 
 // записывает граничные индексы в start, end между которыми
 // расположено значение key

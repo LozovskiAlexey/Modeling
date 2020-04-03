@@ -21,8 +21,7 @@ void MainWindow::on_pushButton_clicked()
     getData(p);
 
     count_all(data, p);
-
-    form_graphs(graphics, data);
+    generate_graphs(graphics, data);
 
     drawAll(graphics);
 

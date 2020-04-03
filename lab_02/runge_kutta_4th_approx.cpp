@@ -2,7 +2,7 @@
 
 
 // Вычисляет методом Рунге-Кутты пару значений U, I
-void Runge_Kutta_4th_approx(double &U, double &I, param_t &p)
+void Runge_Kutta_fourth_approx(double &U, double &I, param_t &p)
 {
     double k;                    // коэффициенты для вычисления 4 порядка точности
     double m;

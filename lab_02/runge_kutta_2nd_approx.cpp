@@ -1,7 +1,7 @@
 #include "runge_kutta_2nd_approx.h"
 
 
-void Runge_Kutta_2nd_approx(double &U, double &I, param_t &p)
+void Runge_Kutta_second_approx(double &U, double &I, param_t &p)
 {
     double dU, dI;
 
