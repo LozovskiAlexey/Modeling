@@ -1,12 +1,12 @@
 #include "funcs.h"
 
-// основные формулы лабы (см. методичку g(I))
+// Основные формулы лабы (см. методичку g(I))
 double G(double I, param_t &p)
 {
     return -I / p.Ck;
 }
 
-// основные формулы лабы (см. методичку F(I, U))
+// Основные формулы лабы (см. методичку F(I, U))
 double F(double I, double U, param_t &p)
 {
     return (U - I*(p.Rk - Rp(I))) / p.Lk;
@@ -37,7 +37,7 @@ double integrate(const double &I)
     return res;
 }
 
-// вычисляет подынтегральное выражение на каждом z
+// Вычисляет подинтегральное выражение на каждом z
 double count(const double &z, const double &I)
 {
     double tmp_T = T(z, I);
@@ -97,7 +97,7 @@ double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2,
     }
 }
 
-// записывает граничные индексы в start, end между которыми
+// Записывает граничные индексы в start, end между которыми
 // расположено значение key
 // в случае, если key находится за пределами массива, берутся первые либо последние два элемента для интерполяции
 void count_indexes(const QVector<double> &vec, int &start, int &end, const double &key)

@@ -1,19 +1,26 @@
 #include "main_funcs.h"
 
+// Вычисление компонентов для каждого приближения (второго и четвертого)
+
+// Вычисление векторов
 void count_all(data_t &data, param_t &p)
 {
+    // Распараллелить
     count_params(data.fourth_approx, p, Runge_Kutta_fourth_approx);
     count_params(data.second_approx, p, Runge_Kutta_second_approx);
 }
 
+// Формирование графиков для отрисовки
 void generate_graphs(draw_data_t &graphics, data_t &data)
 {
     generate_graphs(graphics.second_approx, data.second_approx);
     generate_graphs(graphics.fourth_approx, data.fourth_approx);
 }
 
+// Вычисление каждого компонента
 // =============================================================================================
 
+// Вычисление векторов значений (зависимых от t)
 void count_params(graph_points_t *data, param_t &p, void (*method)(double&, double&, param_t&))
 {
     count_U_I(data, p, method);
@@ -22,6 +29,7 @@ void count_params(graph_points_t *data, param_t &p, void (*method)(double&, doub
     count_T0(data);
 }
 
+//
 void generate_graphs(graphics_t *graphics, graph_points_t *data)
 {
     generate_Rp_graphic(graphics->Rp, data);
@@ -31,6 +39,7 @@ void generate_graphs(graphics_t *graphics, graph_points_t *data)
     generate_T0_graphic(graphics->T0, data);
 }
 
+// Вычисление каждого вектора отдельно
 // =============================================================================================
 
 void count_U_I(graph_points_t *data, param_t &p, void (*method)(double&, double&, param_t&))
@@ -56,6 +65,7 @@ void count_T0(graph_points_t *data)
     count_T0(data->T0, data->I);
 }
 
+// Инициализация каждой структуры графика для отрисовки
 
 void generate_Rp_graphic(graphic_t *Rp, graph_points_t *data)
 {
@@ -82,9 +92,8 @@ void generate_T0_graphic(graphic_t *T0, graph_points_t *data)
     init(T0, data->T0, data->t, "T0", "t");
 }
 
-
+// Реализация вычислений
 // =============================================================================================
-
 
 void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&))
 {
@@ -101,6 +110,7 @@ void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &
     }
 }
 
+// Распараллелить
 void count_Rp(QVector<double> &_Rp, QVector<double> &I)
 {
     for (auto tmp_I : I)
@@ -113,12 +123,14 @@ void count_Ucp(QVector<double> &_Ucp, QVector<double> &U, QVector<double> &I)
         _Ucp.push_back(U[i]*I[i]);
 }
 
+// Распараллелить
 void count_T0(QVector<double> &_T0, QVector<double> &I)
 {
     for (auto tmp_I : I)
         _T0.push_back(T0(tmp_I));
 }
 
+// функции инициализации, выделения и освобождения памяти
 // ============================================================================================
 
 void init(draw_data_t &data)

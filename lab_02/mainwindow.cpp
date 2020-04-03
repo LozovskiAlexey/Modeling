@@ -13,17 +13,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Основная функция программы, выполняет вычисления и строит графики
 void MainWindow::on_pushButton_clicked()
 {
-    init(data);
+    init(data);                     // Инициализация данных
     init(graphics);
 
-    getData(p);
+    getData(p);                     // Считывание значений из виджетов
 
-    count_all(data, p);
-    generate_graphs(graphics, data);
+    count_all(data, p);             // Вычисление векторов значений U I T0 Ucp Rp
+    generate_graphs(graphics, data);// Формирование структур для отрисовки
 
-    drawAll(graphics);
+    drawAll(graphics);              // Отрисовка графиков
 
     release(data);
     release(graphics);
@@ -63,7 +64,7 @@ void MainWindow::draw(QCustomPlot *canvas, graphic_t &graph1, graphic_t &graph2)
     updateCanvas(canvas);
 }
 
-
+// Добавление графика на виджет
 void MainWindow::addToCanvas(QCustomPlot *canvas, const graphic_t &graph, int no)
 {
     canvas->addGraph();
@@ -74,7 +75,7 @@ void MainWindow::addToCanvas(QCustomPlot *canvas, const graphic_t &graph, int no
     setAxis(canvas->yAxis, graph.Y, graph.yAxis);
 }
 
-
+// Настройка осей координат
 void MainWindow::setAxis(QCPAxis *canvas, const QVector<double> &axis, const QString &name)
 {
     // название оси
@@ -85,13 +86,13 @@ void MainWindow::setAxis(QCPAxis *canvas, const QVector<double> &axis, const QSt
     canvas->setRange(*limits.first, *limits.second);
 }
 
-
+// Очищение виджета
 void MainWindow::clearCanvas(QCustomPlot *canvas)
 {
     canvas->clearGraphs();
 }
 
-
+// Обновление виджета (отрисовка)
 void MainWindow::updateCanvas(QCustomPlot *canvas)
 {
     canvas->replot();

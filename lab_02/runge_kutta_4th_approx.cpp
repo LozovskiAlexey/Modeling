@@ -7,7 +7,7 @@ void Runge_Kutta_fourth_approx(double &U, double &I, param_t &p)
     double k;                    // коэффициенты для вычисления 4 порядка точности
     double m;
 
-    count_coeffs(k, m, I, U, p);    // вычисляем k, m
+    count(k, m, I, U, p);    // вычисляем k, m
 
     U += _dt*m/6;                 // m = m1+2m2+2m3+m4
     I += _dt*k/6;                 // k = k1+2k2+2k3+k4
@@ -15,7 +15,7 @@ void Runge_Kutta_fourth_approx(double &U, double &I, param_t &p)
 
 
 // Вычисляет коэф-ты K и M (используются в пошаговом Рунге-Кутта)
-void count_coeffs(double &k, double &m, double I, double U, param_t &p)
+void count(double &k, double &m, double I, double U, param_t &p)
 {
     double k1, k2, k3, k4;
     double m1, m2, m3, m4;

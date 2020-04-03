@@ -3,8 +3,7 @@
 
 #include "runge_kutta_2nd_approx.h"
 #include "runge_kutta_4th_approx.h"
-#include "structs.h"
-#include "funcs.h"
+
 
 void count_all(data_t &data, param_t &p);
 void generate_graphs(draw_data_t &graphics, data_t &data);
@@ -26,6 +25,7 @@ void generate_Ucp_graphic(graphic_t *Ucp, graph_points_t *data);
 void generate_T0_graphic(graphic_t *T0, graph_points_t *data);
 
 
+void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&));
 void count_Ucp(QVector<double> &Ucp, QVector<double> &U, QVector<double> &I);
 void count_Rp(QVector<double> &Rp, QVector<double> &I);
 void count_T0(QVector<double> &T0, QVector<double> &I);

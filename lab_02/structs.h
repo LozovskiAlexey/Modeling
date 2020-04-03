@@ -45,13 +45,14 @@ struct graphic_points{
     QVector<double> T0;
 };
 
-
+// структура графиков для каждого приближения
 struct draw_data{
     graphics_t *second_approx;
     graphics_t *fourth_approx;
 };
 
 
+// структура графиков для отрисовки для одного приближения
 struct graphics{
     graphic_t *Rp;
     graphic_t *I;
