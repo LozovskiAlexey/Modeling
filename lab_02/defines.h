@@ -5,14 +5,14 @@
 
 static const QVector<QColor> color {Qt::red, Qt::blue};
 
-static const double _tmax = 700;
+static const double _tmax = 750e-6;
 
 static const double PI = 3.141592653589793;
 
 static const double _R  = 0.35;
 static const double _Le = 12.0;
 static const double _Tn = 2000.0;
-static const double _dt = 4;
+static const double _dt = 1e-6;
 
 static const double _const = _Le / (2*_R*_R*PI);
 
@@ -22,8 +22,8 @@ static const double _const = _Le / (2*_R*_R*PI);
 //static const std::vector<double> _m {0.4, 0.55, 1.7, 3, 11, 32, 40, 41, 39};
 
 static const QVector<double> _I { 0.5, 1, 5, 10, 50, 200, 400, 800, 1200 };
-static const QVector<double> _T0{ 6400, 6790, 7150, 7270, 8010, 9185, 10010, 11140, 12010};
-static const QVector<double> _m {0.4, 0.55, 1.7, 3, 11, 32, 40, 41, 39};
+static const QVector<double> _T0{ 6700, 6790, 7150, 7270, 8010, 9185, 10010, 11140, 12010};
+static const QVector<double> _m {0.5, 0.55, 1.7, 3, 11, 32, 40, 41, 39};
 
 // Таблица для интерполяции сигмы
 //static const std::vector<double> _T    {4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000,13000, 14000};

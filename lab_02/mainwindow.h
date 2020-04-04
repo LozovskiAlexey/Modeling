@@ -35,9 +35,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    // для удобства, по-хорошему, этого тут быть не должно
-    draw_data_t graphics;
-    data_t data;
-    param_t p;
 };
 #endif // MAINWINDOW_H

@@ -2,14 +2,14 @@
 
 // Основные формулы лабы (см. методичку g(I))
 double G(double I, param_t &p)
-{
+{   
     return -I / p.Ck;
 }
 
 // Основные формулы лабы (см. методичку F(I, U))
 double F(double I, double U, param_t &p)
 {
-    return (U - I*(p.Rk - Rp(I))) / p.Lk;
+    return (U - I*(p.Rk + Rp(I))) / p.Lk;
 }
 
 // Вычисление параметра Rp функции F(I, U)
@@ -43,7 +43,7 @@ double count(const double &z, const double &I)
     double tmp_T = T(z, I);
     double tmp_sigma = sigma(tmp_T);
 
-    return tmp_T * tmp_sigma * z;
+    return tmp_sigma * z;
 }
 
 double T0(const double &I)

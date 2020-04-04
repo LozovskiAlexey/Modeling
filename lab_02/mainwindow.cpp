@@ -16,6 +16,10 @@ MainWindow::~MainWindow()
 // Основная функция программы, выполняет вычисления и строит графики
 void MainWindow::on_pushButton_clicked()
 {
+    draw_data_t graphics;
+    data_t data;
+    param_t p;
+
     init(data);                     // Инициализация данных
     init(graphics);
 

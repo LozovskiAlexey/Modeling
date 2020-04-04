@@ -44,7 +44,7 @@ void generate_graphs(graphics_t *graphics, graph_points_t *data)
 
 void count_U_I(graph_points_t *data, param_t &p, void (*method)(double&, double&, param_t&))
 {
-    count_Runge_Kutta(data->t, data->U, data->I, p, method);
+    count_Runge_Kutta(data->t, data->I, data->U, p, method);
 }
 
 
@@ -69,33 +69,33 @@ void count_T0(graph_points_t *data)
 
 void generate_Rp_graphic(graphic_t *Rp, graph_points_t *data)
 {
-    init(Rp, data->Rp, data->I, "Rp", "t");
+    init(Rp, data->Rp, data->I, "t", "Rp");
 }
 
 void generate_I_graphic(graphic_t *I, graph_points_t *data)
 {
-    init(I, data->I, data->t, "I", "t");
+    init(I, data->I, data->t, "t", "I");
 }
 
 void generate_U_graphic(graphic_t *U, graph_points_t *data)
 {
-    init(U, data->U, data->t, "U", "t");
+    init(U, data->U, data->t, "t", "U");
 }
 
 void generate_Ucp_graphic(graphic_t *Ucp, graph_points_t *data)
 {
-    init(Ucp, data->Ucp, data->t, "Ucp", "t");
+    init(Ucp, data->Ucp, data->t, "t", "Ucp");
 }
 
 void generate_T0_graphic(graphic_t *T0, graph_points_t *data)
 {
-    init(T0, data->T0, data->t, "T0", "t");
+    init(T0, data->T0, data->t, "t", "T0");
 }
 
 // Реализация вычислений
 // =============================================================================================
 
-void count_Runge_Kutta(QVector<double> &T, QVector<double> &U, QVector<double> &I, param_t &p, void (*method)(double&, double&, param_t&))
+void count_Runge_Kutta(QVector<double> &T, QVector<double> &I, QVector<double> &U, param_t &p, void (*method)(double&, double&, param_t&))
 {
     auto tmp_U = p.Uc0; // стартовое значение U
     auto tmp_I = p.I0;  // стартовое значение I
@@ -133,69 +133,31 @@ void count_T0(QVector<double> &_T0, QVector<double> &I)
 // функции инициализации, выделения и освобождения памяти
 // ============================================================================================
 
-void init(draw_data_t &data)
-{
-    init(data.second_approx);
-    init(data.fourth_approx);
-}
-
-void init(data_t &data)
-{
-    init(data.second_approx);
-    init(data.fourth_approx);
-}
-
-void release(draw_data_t &data)
-{
-    release(data.second_approx);
-    release(data.second_approx);
-}
-
-void release(data_t &data)
-{
-    release(data.second_approx);
-    release(data.fourth_approx);
-}
-
-// ============================================================================================
-
-void init(graphics_t *data)
-{
-    data = new graphics_t;
-}
-
-void init(graph_points_t *data)
-{
-    data = new graph_points_t;
-}
-
 void init(graphic_t *graphic, QVector<double> &X, QVector<double> &Y, QString xAxis, QString yAxis)
 {
-    graphic = new graphic_t;
-
     graphic->X = X;
     graphic->Y = Y;
     graphic->xAxis = xAxis;
     graphic->yAxis = yAxis;
 }
 
-void release(graphics_t *graphic)
+void init(data_t &structure)
 {
-    release(graphic->I);
-    release(graphic->U);
-    release(graphic->Ucp);
-    release(graphic->Rp);
-    release(graphic->T0);
-
-    delete graphic;
+    structure.init();
 }
 
-void release(graph_points_t *graphic)
+void release(data_t &structure)
 {
-    delete graphic;
+    structure.release();
 }
 
-void release(graphic_t *graphic)
+void init(draw_data_t &structure)
 {
-    delete graphic;
+    structure.init();
 }
+
+void release(draw_data_t &structure)
+{
+    structure.release();
+}
+

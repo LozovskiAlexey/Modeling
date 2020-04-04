@@ -2,36 +2,36 @@
 
 
 // Вычисляет методом Рунге-Кутты пару значений U, I
-void Runge_Kutta_fourth_approx(double &U, double &I, param_t &p)
+void Runge_Kutta_fourth_approx(double &I, double &U, param_t &p)
 {
     double k;                    // коэффициенты для вычисления 4 порядка точности
     double m;
 
-    count(k, m, I, U, p);    // вычисляем k, m
+    count_fourth(k, m, I, U, p);    // вычисляем k, m
 
-    U += _dt*m/6;                 // m = m1+2m2+2m3+m4
-    I += _dt*k/6;                 // k = k1+2k2+2k3+k4
+    U += m/6;                 // m = m1+2m2+2m3+m4
+    I += k/6;                 // k = k1+2k2+2k3+k4
 }
 
 
 // Вычисляет коэф-ты K и M (используются в пошаговом Рунге-Кутта)
-void count(double &k, double &m, double I, double U, param_t &p)
+void count_fourth(double &k, double &m, double I, double U, param_t &p)
 {
     double k1, k2, k3, k4;
     double m1, m2, m3, m4;
 
     // расчет коэффициентов k и m
-    m1 = G(I, p);
-    k1 = F(I, U, p);
+    m1 = _dt*G(I, p);
+    k1 = _dt*F(I, U, p);
 
-    m2 = G(I+_dt*k1/2, p);
-    k2 = F(I+_dt*k1/2, U+_dt*m1/2, p);
+    m2 = _dt*G(I+k1/2, p);
+    k2 = _dt*F(I+k1/2, U+m1/2, p);
 
-    m3 = G(I+_dt*k2/2, p);
-    k3 = F(I+_dt*k2/2, U+_dt*m2/2, p);
+    m3 = _dt*G(I+k2/2, p);
+    k3 = _dt*F(I+k2/2, U+m2/2, p);
 
-    m4 = G(I+_dt*k3/2, p);
-    k4 = F(I+_dt*k3/2, U+_dt*m3/2, p);
+    m4 = _dt*G(I+k3, p);
+    k4 = _dt*F(I+k3, U+m3, p);
 
     // в результирующие переменные запишем сумму
     k = k1 + 2*k2 + 2*k3 + k4;
