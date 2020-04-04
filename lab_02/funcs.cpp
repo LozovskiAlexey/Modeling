@@ -15,17 +15,15 @@ double F(double I, double U, param_t &p)
 // Вычисление параметра Rp функции F(I, U)
 double Rp(const double &I)
 {
-    auto integral = integrate(I); // интегральное выражение в знаменателе
+    auto integral = integrate(0, 1, I); // интегральное выражение в знаменателе
 
     return _const / integral;
 }
 
 // Интегрирование методом трапеций
-double integrate(const double &I)
+double integrate(double start, double end, const double &I)
 {
     auto step = 0.01;
-    auto start = 0.;
-    auto end = 1.;
 
     auto res = (count(start, I) + count(end, I)) / 2;
 
@@ -92,7 +90,7 @@ double log_interpolate(const QVector<double> &vec1, const QVector<double> &vec2,
         return vec1[start];
     else
     {
-        auto res = std::log(vec1[start])+std::log(vec1[end]/vec1[start])*(key - vec2[start])/(vec2[end] - vec2[start]);
+        auto res = std::log(vec1[start])+std::log(vec1[end] / vec1[start])*(key - vec2[start])/(vec2[end] - vec2[start]);
         return std::exp(res);
     }
 }

@@ -69,27 +69,27 @@ void count_T0(graph_points_t *data)
 
 void generate_Rp_graphic(graphic_t *Rp, graph_points_t *data)
 {
-    init(Rp, data->Rp, data->I, "t", "Rp");
+    init(Rp, data->I, data->Rp, "t", "Rp");
 }
 
 void generate_I_graphic(graphic_t *I, graph_points_t *data)
 {
-    init(I, data->I, data->t, "t", "I");
+    init(I, data->t, data->I, "t", "I");
 }
 
 void generate_U_graphic(graphic_t *U, graph_points_t *data)
 {
-    init(U, data->U, data->t, "t", "U");
+    init(U, data->t, data->U, "t", "U");
 }
 
 void generate_Ucp_graphic(graphic_t *Ucp, graph_points_t *data)
 {
-    init(Ucp, data->Ucp, data->t, "t", "Ucp");
+    init(Ucp, data->t,data->Ucp, "t", "Ucp");
 }
 
 void generate_T0_graphic(graphic_t *T0, graph_points_t *data)
 {
-    init(T0, data->T0, data->t, "t", "T0");
+    init(T0, data->t, data->T0, "t", "T0");
 }
 
 // Реализация вычислений

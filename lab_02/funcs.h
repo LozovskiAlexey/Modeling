@@ -16,7 +16,7 @@ double m(const double &I);
 double sigma(const double &T);
 
 
-double integrate(const double &I);
+double integrate(double start, double end, const double &I);
 double count(const double &z, const double &I);
 
 

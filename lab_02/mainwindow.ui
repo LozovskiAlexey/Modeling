@@ -271,7 +271,7 @@ border-radius: 2px;</string>
              <double>99999999.000000000000000</double>
             </property>
             <property name="value">
-             <double>0.000150000000000</double>
+             <double>0.000268000000000</double>
             </property>
            </widget>
           </item>
@@ -334,7 +334,7 @@ border-redius: 4pr;
              <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
             </property>
             <property name="value">
-             <double>0.000060000000000</double>
+             <double>0.000187000000000</double>
             </property>
            </widget>
           </item>
@@ -372,7 +372,7 @@ border-redius: 4pr;
              <double>99999999.000000000000000</double>
             </property>
             <property name="value">
-             <double>0.000000000000000</double>
+             <double>3.000000000000000</double>
             </property>
            </widget>
           </item>
